@@ -1,8 +1,8 @@
 # SIGNAL BREAK
 
-[![make.fun](https://make.fun/badge/threejs-fps-02.svg)](https://make.fun/competitions/threejs-fps-02)
-[![Rank](https://make.fun/badge/threejs-fps-02/vantam3/make-fun/rank.svg)](https://make.fun/competitions/threejs-fps-02)
-[![Reward](https://make.fun/badge/threejs-fps-02/vantam3/make-fun/reward.svg)](https://make.fun/competitions/threejs-fps-02)
+[![make.fun](https://make.fun/badge/threejs-fps-02.svg)](https://make.fun/bounty/threejs-fps-02)
+[![Rank](https://make.fun/badge/threejs-fps-02/vantam3/make-fun/rank.svg)](https://make.fun/bounty/threejs-fps-02)
+[![Reward](https://make.fun/badge/threejs-fps-02/vantam3/make-fun/reward.svg)](https://make.fun/bounty/threejs-fps-02)
 
 An original single-player tactical FPS in a coastal radar station. First to four rounds: eliminate three sentries or plant the uplink and defend its transmission. Sentries patrol, investigate gunfire, engage visible operators and navigate to defuse. Buy a precision sidearm, automatic rifle, extra frag or ablative armor between rounds.
 
@@ -13,3 +13,5 @@ WASD moves, mouse aims, click fires, R reloads, Shift sprints, C/Ctrl crouches, 
 `node tests/core.mjs` checks simulation mechanics. `MAKEFUN_OUTPUT_DIR=/tmp/signal-break-output node main.ts` copies the game and screenshots and builds the official deterministic dossier with the unchanged kit library. Capture screenshots through real browser interaction before packaging. The parent-run capture/check script is maintained outside this entry at `/tmp/fps-browser-check.mjs`.
 
 The pre-existing simulation, input, map, combat, AI, HTML/CSS and parent armor correction were retained. This completion adds rendering, HUD and integration, round presentation, tests, packaging, and defuse/trigger refinements. three.js and the official dossier library are supplied kit dependencies, preserved unchanged with their notices. Original game code is MIT licensed.
+
+Final parent validation: 10 simulation checks passed on native Node22.23.4. Real Chromium WebGL play passed start, purchases, shooting, reload, grenade, normal round defeat, next round and pause/resume, with no page errors or external requests. Escape release now checks actual pointer lock as well as cached input state. Screenshots are genuine game renders. No rank or reward is claimed.

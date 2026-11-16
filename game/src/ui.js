@@ -6,7 +6,7 @@ export function createUI(action) {
   function update(s) {
     const playing=s.mode==='play';$('hud').hidden=s.mode==='title';$('panel').hidden=playing;
     $('pause').hidden=['title','won','lost'].includes(s.mode);
-    $('pause').textContent=s.mode==='paused'?'▶ Resume':'Ⅱ Pause';
+    $('pause').textContent=s.mode==='paused'?'Resume':'Pause';
     const notice=playing && s.noticeTime>0?s.notice:'';
     if($('notice').textContent!==notice) $('notice').textContent=notice;
     $('stage-label').textContent=`0${Math.min(3,s.stage+1)} / ${STAGES[Math.min(2,s.stage)].toUpperCase()}`;

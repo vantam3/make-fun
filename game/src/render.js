@@ -66,7 +66,7 @@ export function createRenderer(canvas) {
     c.save();c.translate(1070,270);circle(0,0,34,'#9eb9a12b');line([[-43,0],[43,0]],'#9eb9a12b');line([[0,-43],[0,43]],'#9eb9a12b');label('N',0,-49,'#a1b4a1',9);c.restore();
     lighthouse(s,t);
     for(const pulse of s.pulses){
-      if(pulse.age<0){circle(pulse.x,pulse.y,48,'#f2917ba0',2);circle(pulse.x,pulse.y,48*(-pulse.age/1.6),'#f1b58b60');label('PULSE INCOMING',pulse.x,pulse.y-65,'#ffc4a0',10);}
+      if(pulse.age<0){circle(pulse.x,pulse.y,48,'#f2917ba0',2);circle(pulse.x,pulse.y,48*(-pulse.age/1.6),'#f1b58b60');label('PULSE INCOMING',pulse.x,Math.min(HEIGHT-95,pulse.y+72),'#ffc4a0',10);}
       else{circle(pulse.x,pulse.y,pulse.radius,'#ee987a90',4);circle(pulse.x,pulse.y,pulse.radius+9,'#d79b7a25',7);}
     }
     for(const r of s.relics) { circle(r.x,r.y,18,'#70dec336');relic(r.x,r.y,quiet?0:Math.sin(t+r.phase)*.2); }

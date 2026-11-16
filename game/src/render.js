@@ -2,7 +2,7 @@ import * as T from 'three';
 import {BOXES,SITE} from './map.js';
 export function createRenderer(host){
   const renderer=new T.WebGLRenderer({antialias:true});renderer.setPixelRatio(Math.min(devicePixelRatio,1.75));host.append(renderer.domElement);
-  renderer.shadowMap.enabled=true;renderer.shadowMap.type=T.PCFSoftShadowMap;renderer.outputColorSpace=T.SRGBColorSpace;renderer.toneMapping=T.ACESFilmicToneMapping;
+  renderer.shadowMap.enabled=true;renderer.shadowMap.type=T.PCFSoftShadowMap;renderer.shadowMap.autoUpdate=false;renderer.shadowMap.needsUpdate=true;renderer.outputColorSpace=T.SRGBColorSpace;renderer.toneMapping=T.ACESFilmicToneMapping;
   const scene=new T.Scene();scene.background=new T.Color('#143c45');scene.fog=new T.Fog('#143c45',25,85);
   const camera=new T.PerspectiveCamera(76,1,.06,160);camera.rotation.order='YXZ';scene.add(camera);
   const mat=(color,metalness=0)=>new T.MeshStandardMaterial({color,roughness:.78,metalness});
@@ -23,9 +23,9 @@ export function createRenderer(host){
   const rim=new T.Mesh(new T.TorusGeometry(4,.09,8,48),steel);rim.rotation.x=Math.PI/2;dish.add(rim);box(.13,5,.13,0,1,0,amber,dish);
   const terminal=new T.Group();terminal.position.set(SITE.x,0,SITE.z);scene.add(terminal);box(1.1,1.1,.65,0,.55,0,dark,terminal);const screen=box(.8,.4,.03,0,.86,.34,amber,terminal);
   const ring=new T.Mesh(new T.RingGeometry(2.25,2.35,64),new T.MeshBasicMaterial({color:'#ffb747',side:T.DoubleSide}));ring.rotation.x=-Math.PI/2;ring.position.set(SITE.x,.04,SITE.z);scene.add(ring);
-  const sun=new T.DirectionalLight('#fff0cc',3);sun.position.set(-10,25,12);sun.castShadow=true;sun.shadow.mapSize.set(2048,2048);Object.assign(sun.shadow.camera,{left:-24,right:24,top:24,bottom:-24,far:70});sun.shadow.bias=-.0006;scene.add(sun,new T.HemisphereLight('#a9d7db','#465955',2));
+  const sun=new T.DirectionalLight('#fff0cc',3);sun.position.set(-10,25,12);sun.castShadow=true;sun.shadow.mapSize.set(1024,1024);Object.assign(sun.shadow.camera,{left:-24,right:24,top:24,bottom:-24,far:70});sun.shadow.bias=-.0006;scene.add(sun,new T.HemisphereLight('#a9d7db','#465955',2));
   const bots=[];
-  for(let i=0;i<3;i++){const g=new T.Group();scene.add(g);box(.57,.8,.4,0,1,0,dark,g);box(.38,.38,.38,0,1.6,0,steel,g);box(.3,.07,.04,0,1.6,-.21,amber,g);for(const x of [-.18,.18]){box(.19,.6,.23,x,.3,0,dark,g);box(.17,.65,.2,x*2,1.05,0,steel,g);}box(.12,.15,.75,.25,1.2,-.4,dark,g);bots.push(g);}
+  for(let i=0;i<3;i++){const g=new T.Group();scene.add(g);box(.57,.8,.4,0,1,0,dark,g);box(.38,.38,.38,0,1.6,0,steel,g);box(.3,.07,.04,0,1.6,-.21,amber,g);for(const x of [-.18,.18]){box(.19,.6,.23,x,.3,0,dark,g);box(.17,.65,.2,x*2,1.05,0,steel,g);}box(.12,.15,.75,.25,1.2,-.4,dark,g);g.traverse(o=>{o.castShadow=false;});bots.push(g);}
   const gun=new T.Group();camera.add(gun);box(.14,.17,.46,0,0,0,dark,gun);box(.06,.06,.4,0,.02,-.35,steel,gun);box(.09,.22,.12,0,-.17,.03,steel,gun);box(.07,.06,.09,0,.11,-.05,amber,gun);box(.16,.13,.25,0,-.03,.3,dark,gun);
   const flash=new T.Mesh(new T.ConeGeometry(.11,.3,6),new T.MeshBasicMaterial({color:'#ffe6a2'}));flash.rotation.x=-Math.PI/2;flash.position.z=-.67;gun.add(flash);
   const grenade=new T.Mesh(new T.SphereGeometry(.14,8,8),steel);scene.add(grenade);
@@ -39,7 +39,7 @@ export function createRenderer(host){
     screen.visible=!s.planted||Math.sin(time*12)>0;ring.material.color.set(s.planted?'#74e3d0':'#ffb747');
     grenade.visible=!!s.grenade;if(s.grenade)grenade.position.set(s.grenade.x,s.grenade.y,s.grenade.z);
     blast.visible=s.blast>0;if(s.blast>0){blast.position.set(s.blastX,.5,s.blastZ);blast.scale.setScalar((.5-s.blast)*12);}
-    tracer.visible=s.tracer.life>0;const a=tracerGeometry.attributes.position;a.setXYZ(0,p.x,p.eye-.1,p.z);a.setXYZ(1,s.tracer.x,s.tracer.y,s.tracer.z);a.needsUpdate=true;
+    tracer.visible=s.tracer.life>0;const a=tracerGeometry.attributes.position;a.setXYZ(0,s.tracer.ox??p.x,s.tracer.oy??p.eye,s.tracer.oz??p.z);a.setXYZ(1,s.tracer.x,s.tracer.y,s.tracer.z);a.needsUpdate=true;
     renderer.render(scene,camera);
   }};
 }

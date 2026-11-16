@@ -20,7 +20,7 @@ export function trace(s,ox,oy,oz,dx,dy,dz,targets,amount,headMultiplier=3){let c
     const body=rayBox(ox,oy,oz,dx,dy,dz,b.x,eye-.59,b.z,.6,crouch?.7:1.05,.48);
     const d=Math.min(h,body);if(d<closest){closest=d;target=b;head=h<=body;}}
   if(target)damage(s,target,amount*(head?headMultiplier:1),head);
-  s.tracer.x=ox+dx*closest;s.tracer.y=oy+dy*closest;s.tracer.z=oz+dz*closest;s.tracer.life=.07;
+  s.tracer.ox=ox;s.tracer.oy=oy;s.tracer.oz=oz;s.tracer.x=ox+dx*closest;s.tracer.y=oy+dy*closest;s.tracer.z=oz+dz*closest;s.tracer.life=.07;
   return target;
 }
 export function fire(s,random=Math.random){const p=s.player,w=WEAPONS[p.weapon];if(p.hp<=0||p.mag<=0||p.reload||p.cooldown>0)return false;

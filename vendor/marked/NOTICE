@@ -17,3 +17,10 @@ default options (GFM on, async off).
                   sha256 8e3a3f82f59a60958f56ca08f445647c32a4733dc7ca6c2c46f6eb898471ab9c
 
 Nothing here is edited. The house baseline carries the same two files (baseline/vendor/marked/).
+
+Local fork for markdown-render-speed-02 (2026): marked.esm.js now adds
+required-start-character guards to the default inline dispatch. Consequently
+the upstream statements above about unchanged bytes describe its origin, not
+this modified file. The grammar, tokenizer methods and fallback renderer remain
+upstream. Root parse.js supplies independent default-only lexer fast paths and
+text/code escaping. See root LICENSE for local MIT licensing.

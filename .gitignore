@@ -1,0 +1,27 @@
+# Credentials must never enter Git, including private repositories.
+.env
+.env.*
+!.env.example
+*keypair*.json
+wallet.json
+wallet-*.json
+credentials
+credentials.*
+*.pem
+*.key
+.makefun/credentials*
+.makefun/keypairs/
+.makefun/recording*.json
+.makefun/recordings.json
+
+# Local tools, private state, session exports, and previews.
+work/
+private/
+*-kit/
+*.tar.gz
+*.gitbundle
+*.jsonl
+transcripts/
+out/
+__pycache__/
+node_modules/

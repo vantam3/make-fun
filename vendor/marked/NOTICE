@@ -23,4 +23,4 @@ required-start-character guards to the default inline dispatch. Consequently
 the upstream statements above about unchanged bytes describe its origin, not
 this modified file. The grammar, tokenizer methods and fallback renderer remain
 upstream. Root parse.js supplies independent default-only lexer fast paths and
-text/code escaping. See root LICENSE for local MIT licensing.
+regex specialization. See root LICENSE for local MIT licensing.
